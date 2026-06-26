@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <!-- ================== META CƠ BẢN ================== -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- ================== SEO TITLE & DESCRIPTION ================== -->
+    <title>404 - Không tìm thấy trang | DuckAI Chatbot</title>
+    <meta
+      name="description"
+      content="Xin lỗi, trang bạn đang tìm kiếm không tồn tại hoặc đã được di chuyển."
+    />
+
+    <!-- ================== FAVICON & APP ICONS ================== -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo-192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1a1a2e" />
+
+    <!-- ================== GOOGLE FONTS ================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ================== TAILWIND CSS CDN ================== -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+
+    <style>
+      /* ----------------- THEME VARIABLES ----------------- */
+      :root {
+        /* Dark Mode Defaults */
+        --color-duck-bg: #1a1a2e;
+        --color-duck-surface: #16213e;
+        --color-duck-primary: #0f3460;
+        --color-duck-secondary: #e94560;
+        --color-duck-text: #dcdcdc;
+        
+        /* New Dark Mode Accent (#EC4899 - Pink 500) */
+        --color-duck-accent: #EC4899; 
+        
+        /* New Dark Mode Link (#F59E0B - Amber 500) */
+        --color-duck-link: #FFFFFF; 
+      }
+
+      html.light {
+        /* Light Mode Defaults */
+        --color-duck-bg: #f9fafb;
+        --color-duck-surface: #ffffff;
+        --color-duck-primary: #cbd5e1;
+        --color-duck-secondary: #e94560;
+        --color-duck-text: #111827;
+        
+        /* New Light Mode Accent (#DB2777 - Pink 600) */
+        --color-duck-accent: #DB2777;
+        
+        /* New Light Mode Link (#D97706 - Amber 600) */
+        --color-duck-link: #000000;
+      }
+
+      body {
+        background-color: var(--color-duck-bg);
+        color: var(--color-duck-text);
+        font-family: 'Outfit', sans-serif;
+        background-image: 
+          radial-gradient(circle at 10% 20%, rgba(236, 72, 153, 0.08) 0%, transparent 40%),
+          radial-gradient(circle at 90% 80%, rgba(15, 52, 96, 0.25) 0%, transparent 50%),
+          radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 24px 24px;
+        background-attachment: fixed;
+      }
+
+      html.light body {
+        background-image: 
+          radial-gradient(circle at 10% 20%, rgba(219, 39, 119, 0.04) 0%, transparent 40%),
+          radial-gradient(circle at 90% 80%, rgba(203, 213, 225, 0.2) 0%, transparent 50%),
+          radial-gradient(rgba(17, 24, 39, 0.03) 1px, transparent 1px);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: var(--color-duck-bg); }
+      ::-webkit-scrollbar-thumb { background: var(--color-duck-primary); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--color-duck-secondary); }
+
+      /* Neon Text effect */
+      .neon-text {
+        text-shadow: 0 0 10px var(--color-duck-accent), 0 0 20px var(--color-duck-accent), 0 0 40px var(--color-duck-secondary);
+        animation: neon-pulse 2s ease-in-out infinite alternate;
+      }
+
+      html.light .neon-text {
+        text-shadow: 0 0 10px rgba(219, 39, 119, 0.3), 0 0 20px rgba(219, 39, 119, 0.2);
+        animation: none;
+      }
+
+      @keyframes neon-pulse {
+        from {
+          text-shadow: 0 0 8px var(--color-duck-accent), 0 0 15px var(--color-duck-accent), 0 0 30px var(--color-duck-secondary);
+        }
+        to {
+          text-shadow: 0 0 15px var(--color-duck-accent), 0 0 25px var(--color-duck-accent), 0 0 50px var(--color-duck-secondary);
+        }
+      }
+
+      /* Float animations */
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(4deg);
+        }
+      }
+      .animate-float {
+        animation: float 5s ease-in-out infinite;
+      }
+
+      /* Spin slowly for astronaut accessories */
+      @keyframes slow-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .animate-slow-spin {
+        animation: slow-spin 20s linear infinite;
+      }
+    </style>
+
+    <script>
+      // Sync theme with main app from localStorage
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.classList.add('light');
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+        }
+      })();
+
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'duck-bg': 'var(--color-duck-bg)',
+              'duck-surface': 'var(--color-duck-surface)',
+              'duck-primary': 'var(--color-duck-primary)',
+              'duck-secondary': 'var(--color-duck-secondary)',
+              'duck-text': 'var(--color-duck-text)',
+              'duck-accent': 'var(--color-duck-accent)',
+              'duck-link': 'var(--color-duck-link)',
+            }
+          }
+        }
+      };
+
+      function toggleTheme() {
+        const root = document.documentElement;
+        if (root.classList.contains('light')) {
+          root.classList.remove('light');
+          root.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          root.classList.remove('dark');
+          root.classList.add('light');
+          localStorage.setItem('theme', 'light');
+        }
+      }
+    </script>
+  </head>
+
+  <body class="transition-colors duration-300 min-h-screen flex items-center justify-center p-4 relative overflow-hidden select-none">
+    
+    <!-- Theme Toggle Button -->
+    <button onclick="toggleTheme()" class="absolute top-6 right-6 p-3 rounded-2xl bg-duck-surface/70 border border-duck-primary/20 hover:border-duck-accent/40 text-duck-text hover:text-duck-accent hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg backdrop-blur-md z-50" aria-label="Toggle Theme">
+      <!-- Sun icon (shown in dark mode) -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+      <!-- Moon icon (shown in light mode) -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    </button>
+
+    <!-- Star Particles / Background items -->
+    <div class="absolute top-1/4 left-10 w-2 h-2 bg-duck-accent/40 rounded-full animate-ping" style="animation-duration: 3s;"></div>
+    <div class="absolute bottom-1/4 right-12 w-3 h-3 bg-duck-secondary/30 rounded-full animate-ping" style="animation-duration: 4.5s;"></div>
+    <div class="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-yellow-400/40 rounded-full animate-pulse" style="animation-duration: 2s;"></div>
+    <div class="absolute bottom-1/3 left-1/5 w-2 h-2 bg-blue-400/30 rounded-full animate-pulse" style="animation-duration: 3.5s;"></div>
+
+    <!-- Main Card Container -->
+    <div class="w-full max-w-xl bg-duck-surface/60 border border-duck-primary/20 backdrop-blur-lg rounded-[2rem] p-8 md:p-12 text-center shadow-2xl shadow-duck-accent/5 relative overflow-hidden transition-all duration-300">
+      
+      <!-- Ambient Glow behind card content -->
+      <div class="absolute -top-24 -left-24 w-48 h-48 bg-duck-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-duck-primary/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Animated Space Duck SVG -->
+      <div class="flex justify-center mb-6">
+        <svg viewBox="0 0 100 100" class="w-36 h-36 md:w-44 md:h-44 drop-shadow-[0_8px_16px_rgba(236,72,153,0.25)] animate-float">
+          <!-- Outer Orbit Ring -->
+          <ellipse cx="50" cy="55" rx="35" ry="6" fill="none" stroke="rgba(236, 72, 153, 0.4)" stroke-width="1.5" stroke-dasharray="4 6" class="animate-slow-spin origin-center" style="transform-origin: 50px 55px;" />
+          
+          <!-- Duck body -->
+          <ellipse cx="50" cy="58" rx="22" ry="18" fill="#facc15" />
+          
+          <!-- Wing -->
+          <ellipse cx="43" cy="61" rx="10" ry="7" fill="#fef08a" transform="rotate(-12 43 61)" />
+          
+          <!-- Duck head -->
+          <circle cx="63" cy="44" r="14" fill="#facc15" />
+          
+          <!-- Eye -->
+          <circle cx="67" cy="41" r="2.5" fill="#1e293b" />
+          <circle cx="68.5" cy="39.5" r="0.8" fill="#ffffff" />
+          
+          <!-- Beak -->
+          <path d="M 74 43 Q 83 45 74 49 Z" fill="#f97316" />
+          
+          <!-- Astronaut Space Helmet Bubble -->
+          <circle cx="60" cy="46" r="21" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(236, 72, 153, 0.6)" stroke-width="1.8" />
+          
+          <!-- Helmet Reflection highlight -->
+          <path d="M 46 34 A 21 21 0 0 1 74 34" fill="none" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1.5" />
+          <circle cx="47" cy="37" r="1.8" fill="#ffffff" opacity="0.7" />
+
+          <!-- Oxygen pack tubes -->
+          <path d="M 37 62 Q 28 65 37 72" fill="none" stroke="rgba(15, 52, 96, 0.5)" stroke-width="2.5" />
+          
+          <!-- Backpack -->
+          <rect x="22" y="52" width="8" height="18" rx="3" fill="#e2e8f0" stroke="rgba(15, 52, 96, 0.3)" stroke-width="1" />
+        </svg>
+      </div>
+
+      <!-- Neon Error Code -->
+      <h1 class="text-7xl md:text-8xl font-extrabold text-duck-accent neon-text mb-4 tracking-wider">
+        404
+      </h1>
+
+      <!-- Title / Header -->
+      <h2 class="text-2xl md:text-3xl font-bold mb-4 text-duck-text">
+        Không tìm thấy trang <span class="text-duck-accent">/</span> Page Not Found
+      </h2>
+
+      <!-- Description Section -->
+      <div class="space-y-3 mb-8 px-4 text-sm md:text-base leading-relaxed text-duck-text/75">
+        <p class="font-medium">
+          Có vẻ chú vịt phi hành gia của DuckAI đã lạc vào một chiều không gian khác.
+        </p>
+        <p class="text-xs md:text-sm text-duck-text/60 italic border-t border-duck-primary/10 pt-3">
+          It looks like our astronaut duck has wandered off into another dimension.
+        </p>
+      </div>
+
+      <!-- Action Button Group -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <!-- Go Home Button -->
+        <a href="/" class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-duck-accent to-duck-secondary hover:brightness-110 active:scale-95 transition-all duration-300 shadow-lg shadow-duck-accent/25 flex items-center justify-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+          </svg>
+          Quay lại Trang chủ
+        </a>
+
+        <!-- Open Chat Button -->
+        <a href="/" class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-semibold text-duck-text bg-duck-primary/20 border border-duck-primary/40 hover:bg-duck-primary/30 hover:border-duck-accent/40 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-duck-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          Trò chuyện với AI
+        </a>
+      </div>
+
+      <!-- Footer Branding -->
+      <div class="mt-10 pt-6 border-t border-duck-primary/10 text-xs text-duck-text/45 flex items-center justify-center gap-1.5">
+        <span>DuckAI Chatbot</span>
+        <span class="text-duck-accent">•</span>
+        <span>Developed by Duckdayne</span>
+      </div>
+
+    </div>
+
+  </body>
+</html>
