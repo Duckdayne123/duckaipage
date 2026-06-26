@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DuckAI Chatbot</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    
+    <!-- KaTeX CSS for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+
+    <style>
+      /* ----------------- THEME VARIABLES ----------------- */
+      :root {
+        /* Dark Mode Defaults */
+        --color-duck-bg: #1a1a2e;
+        --color-duck-surface: #16213e;
+        --color-duck-primary: #0f3460;
+        --color-duck-secondary: #e94560;
+        --color-duck-text: #dcdcdc;
+        
+        /* New Dark Mode Accent (#EC4899 - Pink 500) */
+        --color-duck-accent: #EC4899; 
+        
+        /* New Dark Mode Link (#F59E0B - Amber 500) */
+        --color-duck-link: #FFFFFF; 
+      }
+
+      html.light {
+        /* Light Mode Defaults */
+        --color-duck-bg: #f9fafb;
+        --color-duck-surface: #ffffff;
+        --color-duck-primary: #cbd5e1;
+        --color-duck-secondary: #e94560;
+        --color-duck-text: #111827;
+        
+        /* New Light Mode Accent (#DB2777 - Pink 600) */
+        --color-duck-accent: #DB2777;
+        
+        /* New Light Mode Link (#D97706 - Amber 600) */
+        --color-duck-link: #000000;
+      }
+
+      body {
+        background-color: var(--color-duck-bg);
+        color: var(--color-duck-text);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: var(--color-duck-bg); }
+      ::-webkit-scrollbar-thumb { background: var(--color-duck-primary); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--color-duck-secondary); }
+
+      /* KaTeX fixes */
+      .katex { font-size: 1.1em; line-height: 1.2 !important; text-rendering: optimizeLegibility; font-family: KaTeX_Main, 'Times New Roman', serif; }
+      .katex .sqrt > .root { border-top-width: 1px !important; }
+      .katex-display { display: block; margin: 1em 0; overflow-x: auto; overflow-y: hidden; padding: 0.5em 0; max-width: 100%; -webkit-overflow-scrolling: touch; }
+      .katex, .katex-display { color: inherit !important; border-color: currentColor !important; }
+      .katex .text { font-family: inherit !important; }
+
+      /* Dark mode h2 fix */
+      .dark .prose h2 {
+        color: var(--color-duck-text);
+      }
+      /* Bold fix for dark mode */
+      .dark .prose strong {
+        color: var(--color-duck-text);
+      }
+    </style>
+
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'duck-bg': 'var(--color-duck-bg)',
+              'duck-surface': 'var(--color-duck-surface)',
+              'duck-primary': 'var(--color-duck-primary)',
+              'duck-secondary': 'var(--color-duck-secondary)',
+              'duck-text': 'var(--color-duck-text)',
+              'duck-accent': 'var(--color-duck-accent)',
+              'duck-link': 'var(--color-duck-link)',
+            },
+            typography: (theme) => ({
+              DEFAULT: {
+                css: {
+                  color: 'var(--color-duck-text)',
+                  '[class~="lead"]': { color: 'var(--color-duck-text)' },
+                  a: {
+                    color: 'var(--color-duck-link)',
+                    fontWeight: '600',
+                    '&:hover': { color: 'var(--color-duck-secondary)' },
+                  },
+                  strong: { color: 'var(--color-duck-text)' },
+                  h2: { color: 'var(--color-duck-text)' }, // Fix h2
+                  'ol > li::marker': { color: 'var(--color-duck-text)' },
+                  'ul > li::marker': { color: 'var(--color-duck-text)' },
+                  hr: { borderColor: 'var(--color-duck-primary)' },
+                  blockquote: { color: 'var(--color-duck-text)', borderLeftColor: 'var(--color-duck-accent)' },
+                  code: { color: 'var(--color-duck-secondary)' },
+                  'a code': { color: 'var(--color-duck-link)' },
+                  pre: { backgroundColor: 'var(--color-duck-surface)', color: 'var(--color-duck-text)' },
+                  thead: { color: 'var(--color-duck-text)', borderBottomColor: 'var(--color-duck-primary)' },
+                  'tbody tr': { borderBottomColor: 'var(--color-duck-primary)' },
+                },
+              },
+            }),
+          },
+        },
+      };
+
+      function toggleTheme() {
+        document.documentElement.classList.toggle('light');
+        document.documentElement.classList.toggle('dark');
+      }
+    </script>
+
+
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react-markdown": "https://esm.sh/react-markdown@9.0.1?deps=react@19.2.0",
+    "remark-gfm": "https://esm.sh/remark-gfm@4.0.0",
+    "remark-math": "https://esm.sh/remark-math@6.0.0",
+    "rehype-katex": "https://esm.sh/rehype-katex@7.0.0",
+    "rehype-raw": "https://esm.sh/rehype-raw@7.0.0",
+    "react-syntax-highlighter": "https://esm.sh/react-syntax-highlighter@15.5.0?deps=react@19.2.0",
+    "react-syntax-highlighter/dist/esm/styles/prism": "https://esm.sh/react-syntax-highlighter@15.5.0/dist/esm/styles/prism",
+    "react-syntax-highlighter/": "https://aistudiocdn.com/react-syntax-highlighter@^16.0.0",
+    "express": "https://aistudiocdn.com/express@^5.1.0",
+    "url": "https://aistudiocdn.com/url@^0.11.4",
+    "path": "https://aistudiocdn.com/path@^0.12.7",
+    "cors": "https://aistudiocdn.com/cors@^2.8.5",
+    "dotenv": "https://aistudiocdn.com/dotenv@^17.2.3",
+    "multer": "https://aistudiocdn.com/multer@^2.0.2",
+    "mongoose": "https://aistudiocdn.com/mongoose@^9.0.0",
+    "bcryptjs": "https://aistudiocdn.com/bcryptjs@^3.0.3",
+    "jsonwebtoken": "https://aistudiocdn.com/jsonwebtoken@^9.0.2",
+    "axios": "https://aistudiocdn.com/axios@^1.13.2",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "fs": "https://aistudiocdn.com/fs@^0.0.1-security"
+  }
+}
+</script>
+    <script type="module" crossorigin src="/assets/index-CF3Zqxco.js"></script>
+  </head>
+
+  <body class="bg-duck-bg text-duck-text transition-colors duration-300">
+    <div id="root"></div>
+  </body>
+</html>
